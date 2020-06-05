@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/furiousnetworking
+    username: LTVTeam
+    password: diepvien001
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 689812344740-jltgl2e538nmcrftng5pu5a474cte8lh.apps.googleusercontent.com
+            clientSecret: 27Ms7fXc7anv27WYad8s0iOY
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          github:
+            clientId:
+            clientSecret:
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+app:
+  auth:
+    tokenSecret: 04950459034593DVD23FE2E46FF4654 #this one will be replace by another code
+    tokenExpirationMsec: 864000000
+  oauth2:
+    authorizedRedirectUris:
