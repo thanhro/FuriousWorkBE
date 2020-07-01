@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.example.springrecruitingsocial.springrecruitingsocial.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+
 @Component
 public class OAuth2AuthenticationFailureHandle extends SimpleUrlAuthenticationFailureHandler {
 

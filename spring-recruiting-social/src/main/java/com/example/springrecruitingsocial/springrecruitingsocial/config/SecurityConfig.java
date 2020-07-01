@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,11 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private OAuth2AuthenticationSuccessHandle oAuth2AuthenticationSuccessHandle;
 
     @Autowired
-    private HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository;
+    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter(){
         return new TokenAuthenticationFilter();
+    }
+
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieOAuth2AuthorizationRequestRepository(){
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
 
     @Override
@@ -60,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManagerBean();
@@ -73,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/","/error","favicon.ico","/**/*.png","/**/*.gif","/**/*.svg","/**/*.jpg","/**/*.html","/**/*.css","**/*.js").permitAll()
                 .antMatchers("/auth/**","/oauth2/**").permitAll()
                 .anyRequest().authenticated()
-                .and().oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize").authorizationRequestRepository(cookieAuthorizationRequestRepository)
+                .and().oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize").authorizationRequestRepository(cookieOAuth2AuthorizationRequestRepository())
                 .and().redirectionEndpoint().baseUri("/oauth2/callback")
                 .and().userInfoEndpoint().userService(customOAuth2UserService)
                 .and().successHandler(oAuth2AuthenticationSuccessHandle).failureHandler(oAuth2AuthenticationFailureHandle);

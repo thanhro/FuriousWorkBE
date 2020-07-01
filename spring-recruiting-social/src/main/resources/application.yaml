@@ -1,13 +1,13 @@
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/furiousnetworking
-    username: LTVTeam
-    password: diepvien001
+    username: postgres
+    password: 123456
 
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
         hibernate:
@@ -23,16 +23,17 @@ spring:
             scope:
               - email
               - profile
-          github:
-            clientId:
-            clientSecret:
-            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
-            scope:
-              - user:email
-              - read:user
+#          github:
+#            clientId:
+#            clientSecret:
+#            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+#            scope:
+#              - user:email
+#              - read:user
 app:
   auth:
-    tokenSecret: 04950459034593DVD23FE2E46FF4654 #this one will be replace by another code
+    tokenSecret: 04950459034593DVD23FE2E46FF4654 #this one will be replace by another code, create new random secret
     tokenExpirationMsec: 864000000
   oauth2:
     authorizedRedirectUris:
+    - http://localhost:3000/oauth2/redirect

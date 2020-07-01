@@ -4,15 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-@Entity
+@Entity (name="UserLogin")
 public class UserLogin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String member_id;
+    private String id;
 
     @Column(nullable = false)
     private String email;
@@ -27,10 +23,10 @@ public class UserLogin {
     private int status;
 
     @Column(nullable = false)
-    private Timestamp createdAt;
+    private Timestamp create_at;
 
     @Column(nullable = false)
-    private Timestamp updatedAt;
+    private Timestamp update_at;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -38,20 +34,12 @@ public class UserLogin {
 
     private String providerId;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMember_id() {
-        return member_id;
-    }
-
-    public void setMember_id(String member_id) {
-        this.member_id = member_id;
     }
 
     public String getEmail() {
@@ -86,20 +74,20 @@ public class UserLogin {
         this.status = status;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getCreate_at() {
+        return create_at;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreate_at(Timestamp create_at) {
+        this.create_at = create_at;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Timestamp getUpdate_at() {
+        return update_at;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdate_at(Timestamp update_at) {
+        this.update_at = update_at;
     }
 
     public AuthProvider getProvider() {

@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
+import static com.example.springrecruitingsocial.springrecruitingsocial.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+
 @Component
 public class OAuth2AuthenticationSuccessHandle extends SimpleUrlAuthenticationSuccessHandler {
 
