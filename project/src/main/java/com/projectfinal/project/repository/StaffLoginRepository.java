@@ -17,7 +17,7 @@ public interface StaffLoginRepository extends JpaRepository<StaffLogin,Integer> 
     Boolean existsIdByRandom(String id);
 
     @Query(value = "SELECT * FROM staff_login WHERE id = ?1", nativeQuery = true)
-    StaffLogin findById(int id);
+    StaffLogin findById(String id);
 
     @Query(value = "SELECT * FROM staff_login WHERE role_id = ?1",nativeQuery = true)
     List<StaffLogin> findByRoleId(int roleId);

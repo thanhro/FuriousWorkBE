@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserLoginRepository extends JpaRepository<UserLogin,String> {
+public interface UserLoginRepository extends JpaRepository<UserLogin,Integer> {
 
     Optional<UserLogin> findByEmail(String email);
 
@@ -21,7 +21,7 @@ public interface UserLoginRepository extends JpaRepository<UserLogin,String> {
     Boolean existsIdByRandom(String id);
 
     @Query(value = "SELECT * FROM user_login WHERE id = ?1", nativeQuery = true)
-    UserLogin findById(int id);
+    UserLogin findById(String id);
 
     @Query(value = "SELECT * FROM user_login WHERE role_id = ?1",nativeQuery = true)
     List<UserLogin> findByRoleId(int roleId);

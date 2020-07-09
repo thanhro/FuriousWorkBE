@@ -21,7 +21,7 @@ public class UserLoginImpl implements IUserLogin {
     }
 
     @Override
-    public UserLogin findById(int id) {
+    public UserLogin findById(String id) {
         UserLogin findById = userLoginRepository.findById(id);
         return findById;
     }

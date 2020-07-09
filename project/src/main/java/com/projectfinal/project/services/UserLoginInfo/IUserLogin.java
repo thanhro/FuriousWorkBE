@@ -9,7 +9,7 @@ public interface IUserLogin {
 
     List<UserLogin> findAllUserLoginInfo();
 
-    UserLogin findById(int id);
+    UserLogin findById(String id);
 
     List<UserLogin> findByRoleId(int roleId);
 

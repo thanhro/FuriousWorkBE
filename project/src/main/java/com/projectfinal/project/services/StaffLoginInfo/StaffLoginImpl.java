@@ -19,7 +19,7 @@ public class StaffLoginImpl implements IStaffLogin {
     }
 
     @Override
-    public StaffLogin findById(int id) {
+    public StaffLogin findById(String id) {
         StaffLogin findById = staffLoginRepository.findById(id);
         return findById;
     }

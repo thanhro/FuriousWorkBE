@@ -38,7 +38,7 @@ public class UserPrinciple implements UserDetails {
 
     public static StaffPrinciple buildStaff(StaffLogin staffLogin){
         List<GrantedAuthority> authorityList = Collections.singletonList(new SimpleGrantedAuthority("ROLE_STAFF"));
-        return new StaffPrinciple (staffLogin.getId(),staffLogin.getStaff_email(),staffLogin.getPassword(),authorityList);
+        return new StaffPrinciple (staffLogin.getId(),staffLogin.getEmail(),staffLogin.getPassword(),authorityList);
     }
 
     public String getId() {

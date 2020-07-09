@@ -12,7 +12,7 @@ public class StaffLogin {
     private String id;
 
     @Column(nullable = false)
-    private String staff_email;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -40,12 +40,12 @@ public class StaffLogin {
         this.id = id;
     }
 
-    public String getStaff_email() {
-        return staff_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStaff_email(String staff_email) {
-        this.staff_email = staff_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
