@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
-@Entity (name="UserLogin")
+@Entity (name="user_login")
 public class UserLogin {
 
     @Id

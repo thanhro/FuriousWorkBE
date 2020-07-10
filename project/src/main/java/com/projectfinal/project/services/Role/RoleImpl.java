@@ -2,6 +2,7 @@ package com.projectfinal.project.services.Role;
 
 import com.projectfinal.project.model.RoleUser;
 import com.projectfinal.project.repository.RoleUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class RoleImpl implements IRole{
 
+    @Autowired
     private RoleUserRepository roleUserRepository;
 
     @Override
@@ -25,8 +27,8 @@ public class RoleImpl implements IRole{
     }
 
     @Override
-    public List<RoleUser> findByRoleName(String roleName) {
-        List<RoleUser> findByRoleName = roleUserRepository.findByRoleName(roleName);
+    public List<RoleUser> findByRoleName(String role_name) {
+        List<RoleUser> findByRoleName = roleUserRepository.findByRoleName(role_name);
         return findByRoleName;
     }
 
@@ -36,7 +38,7 @@ public class RoleImpl implements IRole{
     }
 
     @Override
-    public RoleUser updateRole(String roleName, String description, Timestamp update_at, int id) {
-        return roleUserRepository.updateRole(roleName,description,update_at,id);
+    public RoleUser updateRole(String role_name, String description, Timestamp update_at, int id) {
+        return roleUserRepository.updateRole(role_name,description,update_at,id);
     }
 }

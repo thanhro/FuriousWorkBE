@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Entity(name = "UserDetail")
+@Entity(name = "user_detail")
 public class UserDetail {
 
     @Id

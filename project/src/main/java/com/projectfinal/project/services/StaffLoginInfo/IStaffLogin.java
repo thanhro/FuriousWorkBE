@@ -11,11 +11,9 @@ public interface IStaffLogin {
 
     StaffLogin findById(String id);
 
-    List<StaffLogin> findByRoleId(int roleId);
+    List<StaffLogin> findByRoleId(int role_id);
 
     List<StaffLogin> findByStatus(int status);
-
-    StaffLogin insertStaffLogin(StaffLogin staffLogin);
 
     StaffLogin updateStaffLogin(String email, String password, int role_id, int company_id, int status, Timestamp update_at, int id);
 

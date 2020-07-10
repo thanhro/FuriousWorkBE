@@ -3,7 +3,7 @@ package com.projectfinal.project.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "RoleUser")
+@Entity(name = "role_user")
 public class RoleUser {
 
     @Id

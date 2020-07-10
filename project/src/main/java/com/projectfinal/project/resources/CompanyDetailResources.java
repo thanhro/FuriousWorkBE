@@ -33,15 +33,15 @@ public class CompanyDetailResources {
         return ResponseObjectFactory.toResult(findCompanyDetailById, HttpStatus.OK);
     }
 
-    @GetMapping("/nameOfCompany")
-    public ResponseEntity<List<CompanyDetail>> findCompanyDetailByNameOfCompany(@RequestParam String nameOfCompany){
-        List<CompanyDetail> findCompanyDetailByNameOfCompany = companyDetailService.findByCompanyName(nameOfCompany);
+    @GetMapping("/name_of_company")
+    public ResponseEntity<List<CompanyDetail>> findCompanyDetailByNameOfCompany(@RequestParam String name_of_company){
+        List<CompanyDetail> findCompanyDetailByNameOfCompany = companyDetailService.findByCompanyName(name_of_company);
         return ResponseObjectFactory.toResult(findCompanyDetailByNameOfCompany, HttpStatus.OK);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyDetail> updateCompanyDetail(@RequestParam String nameOfCompany,@RequestParam String webOfCompany,@RequestParam String emailOfCompany,@RequestParam String phoneOfCompany,@RequestParam String addressOfCompany,@RequestParam String agencyAddress,@RequestParam String companyField,@RequestParam String description,@RequestParam int yearOfOperation,@RequestParam Timestamp update_at,@RequestParam int id){
-        companyDetailService.updateCompanyDetail(nameOfCompany,webOfCompany,emailOfCompany,phoneOfCompany,addressOfCompany,agencyAddress,companyField,description,yearOfOperation,update_at,id);
+    public ResponseEntity<CompanyDetail> updateCompanyDetail(@RequestParam String name_of_company,@RequestParam String web_of_company,@RequestParam String email_of_company,@RequestParam String phone_of_company,@RequestParam String address_of_company,@RequestParam String agency_address_company,@RequestParam String company_field,@RequestParam String description,@RequestParam int year_of_operation,@RequestParam Timestamp update_at,@RequestParam int id){
+        companyDetailService.updateCompanyDetail(name_of_company,web_of_company,email_of_company,phone_of_company,address_of_company,agency_address_company,company_field,description,year_of_operation,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 

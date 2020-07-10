@@ -32,9 +32,9 @@ public class StaffLoginInfoResources {
         return ResponseObjectFactory.toResult(findStaffLoginInfoById, HttpStatus.OK);
     }
 
-    @GetMapping("/roleId")
-    public ResponseEntity<List<StaffLogin>> findStaffLoginInfoByRoleId(@RequestParam int roleId){
-        List<StaffLogin> findStaffLoginInfoByRoleId = staffLoginService.findByRoleId(roleId);
+    @GetMapping("/role_id")
+    public ResponseEntity<List<StaffLogin>> findStaffLoginInfoByRoleId(@RequestParam int role_id){
+        List<StaffLogin> findStaffLoginInfoByRoleId = staffLoginService.findByRoleId(role_id);
         return ResponseObjectFactory.toResult(findStaffLoginInfoByRoleId, HttpStatus.OK);
     }
 
@@ -50,9 +50,4 @@ public class StaffLoginInfoResources {
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StaffLogin> insertStaffLoginInfo(@RequestBody StaffLogin staffLogin){
-        staffLoginService.insertStaffLogin(staffLogin);
-        return ResponseObjectFactory.toResult("Insert Successfully", HttpStatus.OK);
-    }
 }

@@ -25,14 +25,14 @@ public class StaffDetailImpl implements IStaffDetail{
     }
 
     @Override
-    public StaffDetail findByStaffId(String staffId) {
-        StaffDetail findByStaffId = staffDetailRepository.findByStaffId(staffId);
+    public StaffDetail findByStaffId(String staff_id) {
+        StaffDetail findByStaffId = staffDetailRepository.findByStaffId(staff_id);
         return findByStaffId;
     }
 
     @Override
-    public List<StaffDetail> findByStaffName(String staffName) {
-        List<StaffDetail> findByStaffName = staffDetailRepository.findByStaffName(staffName);
+    public List<StaffDetail> findByStaffName(String staff_name) {
+        List<StaffDetail> findByStaffName = staffDetailRepository.findByStaffName(staff_name);
         return findByStaffName;
     }
 
@@ -42,7 +42,7 @@ public class StaffDetailImpl implements IStaffDetail{
     }
 
     @Override
-    public StaffDetail updateStaffDetail(String staffId, String staffFirstName, String staffLastName, String address, String phone, String avatar, Timestamp update_at, int id) {
-        return staffDetailRepository.updateStaffDetail(staffId,staffFirstName,staffLastName,address,phone,avatar,update_at,id);
+    public StaffDetail updateStaffDetail(String staff_id, String staff_first_name, String staff_last_name, String address, String phone, String avatar, Timestamp update_at, int id) {
+        return staffDetailRepository.updateStaffDetail(staff_id,staff_first_name,staff_last_name,address,phone,avatar,update_at,id);
     }
 }

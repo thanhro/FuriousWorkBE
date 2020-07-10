@@ -12,9 +12,9 @@ public interface IRole {
 
     RoleUser findById(int id);
 
-    List<RoleUser> findByRoleName(String roleName);
+    List<RoleUser> findByRoleName(String role_name);
 
     RoleUser insertRole(RoleUser roleUser);
 
-    RoleUser updateRole(String roleName, String description, Timestamp update_at, int id);
+    RoleUser updateRole(String role_name, String description, Timestamp update_at, int id);
 }

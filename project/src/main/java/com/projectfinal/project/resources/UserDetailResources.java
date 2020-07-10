@@ -33,21 +33,21 @@ public class UserDetailResources {
         return ResponseObjectFactory.toResult(findUserDetailById, HttpStatus.OK);
     }
 
-    @GetMapping("/userId")
-    public ResponseEntity<UserDetail> findUserDetailByUserId(@RequestParam String userId){
-        UserDetail findUserDetailByUserId = userDetailService.findByUserId(userId);
+    @GetMapping("/user_id")
+    public ResponseEntity<UserDetail> findUserDetailByUserId(@RequestParam String user_id){
+        UserDetail findUserDetailByUserId = userDetailService.findByUserId(user_id);
         return ResponseObjectFactory.toResult(findUserDetailByUserId, HttpStatus.OK);
     }
 
-    @GetMapping("/username")
-    public ResponseEntity<List<UserDetail>> findUserDetailByUsername(@RequestParam String username){
-        List<UserDetail> findUserDetailByUsername = userDetailService.findByUsername(username);
+    @GetMapping("/user_name")
+    public ResponseEntity<List<UserDetail>> findUserDetailByUsername(@RequestParam String user_name){
+        List<UserDetail> findUserDetailByUsername = userDetailService.findByUsername(user_name);
         return ResponseObjectFactory.toResult(findUserDetailByUsername, HttpStatus.OK);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDetail> updateUserDetail(@RequestParam String userId, @RequestParam String firstName, @RequestParam String lastName, @RequestParam Date dob,@RequestParam String address, @RequestParam String phone, @RequestParam String avatar, @RequestParam Timestamp update_at, @RequestParam int id){
-        userDetailService.updateUserDetail(userId,firstName,lastName,dob,address,phone,avatar,update_at,id);
+    public ResponseEntity<UserDetail> updateUserDetail(@RequestParam String user_id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam Date dob,@RequestParam String address, @RequestParam String phone, @RequestParam String avatar, @RequestParam Timestamp update_at, @RequestParam int id){
+        userDetailService.updateUserDetail(user_id,first_name,last_name,dob,address,phone,avatar,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 

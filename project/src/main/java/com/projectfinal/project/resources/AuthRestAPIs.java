@@ -115,8 +115,8 @@ public class AuthRestAPIs {
         userDetail.setCreate_at(ts);
         userDetail.setUpdate_at(ts);
 
-        userLoginRepository.save(userLogin);
-        userDetailRepository.save(userDetail);
+        userLoginRepository.insertUserLogin(userLogin);
+        userDetailRepository.insertUserDetail(userDetail);
 
         List response = new ArrayList();
         response.add("Sign up successfully");
@@ -140,7 +140,7 @@ public class AuthRestAPIs {
         staffLogin.setId(staffId);/*admin will set this attribute*/
         staffLogin.setEmail(signUpStaffRequest.getEmail());
         staffLogin.setPassword(passwordEncoder.encode(signUpStaffRequest.getPassword()));
-        staffLogin.setRole_id(1);
+        staffLogin.setRole_id(2);
         staffLogin.setCompany_id(signUpStaffRequest.getCompany_id());
         staffLogin.setStatus(2);
         staffLogin.setCreate_at(ts);/*Set time create*/
@@ -156,8 +156,8 @@ public class AuthRestAPIs {
         staffDetail.setCreate_at(ts);
         staffDetail.setUpdate_at(ts);
 
-        staffLoginRepository.save(staffLogin);
-        staffDetailRepository.save(staffDetail);
+        staffLoginRepository.insertStaffLogin(staffLogin);
+        staffDetailRepository.insertStaffDetail(staffDetail);
 
         List response = new ArrayList();
         response.add("Sign up successfully");

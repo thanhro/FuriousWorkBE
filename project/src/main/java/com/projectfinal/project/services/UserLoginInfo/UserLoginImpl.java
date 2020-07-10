@@ -27,8 +27,8 @@ public class UserLoginImpl implements IUserLogin {
     }
 
     @Override
-    public List<UserLogin> findByRoleId(int roleId) {
-        List<UserLogin> findByRoleId = userLoginRepository.findByRoleId(roleId);
+    public List<UserLogin> findByRoleId(int role_id) {
+        List<UserLogin> findByRoleId = userLoginRepository.findByRoleId(role_id);
         return findByRoleId;
     }
 
@@ -36,11 +36,6 @@ public class UserLoginImpl implements IUserLogin {
     public List<UserLogin> findByStatus(int status) {
         List<UserLogin> findByStatus = userLoginRepository.findByStatus(status);
         return findByStatus;
-    }
-
-    @Override
-    public UserLogin insertUserLogin(UserLogin userLogin) {
-        return userLoginRepository.insertUserLogin(userLogin);
     }
 
     @Override

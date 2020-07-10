@@ -24,12 +24,12 @@ public interface UserLoginRepository extends JpaRepository<UserLogin,Integer> {
     UserLogin findById(String id);
 
     @Query(value = "SELECT * FROM user_login WHERE role_id = ?1",nativeQuery = true)
-    List<UserLogin> findByRoleId(int roleId);
+    List<UserLogin> findByRoleId(int role_id);
 
     @Query(value = "SELECT * FROM user_login WHERE status = ?1", nativeQuery = true)
     List<UserLogin> findByStatus(int status);
 
-    @Query(value = "INSERT INTO user_login (email,password,role_id,status,create_at,update_at) values = ?1, ?2, ?3, ?4, ?5, ?6", nativeQuery = true)
+    @Query(value = "INSERT INTO user_login (id, email,password,role_id,status,create_at,update_at) values (?1, ?2, ?3, ?4, ?5, ?6, ?7)", nativeQuery = true)
     UserLogin insertUserLogin(UserLogin userLogin);
 
     @Query(value = "UPDATE user_login SET email = ?1, password = ?2, role_id = ?3, status = ?4, update_at = ?5 WHERE id = ?6", nativeQuery = true)

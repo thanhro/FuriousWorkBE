@@ -11,11 +11,11 @@ public interface IStaffDetail {
 
     StaffDetail findById(int id);
 
-    StaffDetail findByStaffId(String staffId);
+    StaffDetail findByStaffId(String staff_id);
 
-    List<StaffDetail> findByStaffName(String staffName);
+    List<StaffDetail> findByStaffName(String staff_name);
 
     StaffDetail insertStaffDetail(StaffDetail staffDetail);
 
-    StaffDetail updateStaffDetail(String staffId, String staffFirstName, String staffLastName, String address, String phone, String avatar, Timestamp update_at, int id);
+    StaffDetail updateStaffDetail(String staff_id, String staff_first_name, String staff_last_name, String address, String phone, String avatar, Timestamp update_at, int id);
 }

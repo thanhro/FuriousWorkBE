@@ -33,21 +33,21 @@ public class StaffDetailResources {
         return ResponseObjectFactory.toResult(findStaffDetailById, HttpStatus.OK);
     }
 
-    @GetMapping("/staffId")
-    public ResponseEntity<StaffDetail> findStaffDetailByStaffId(@RequestParam String staffId){
-        StaffDetail findStaffDetailByStaffId = staffDetailService.findByStaffId(staffId);
+    @GetMapping("/staff_id")
+    public ResponseEntity<StaffDetail> findStaffDetailByStaffId(@RequestParam String staff_id){
+        StaffDetail findStaffDetailByStaffId = staffDetailService.findByStaffId(staff_id);
         return ResponseObjectFactory.toResult(findStaffDetailByStaffId, HttpStatus.OK);
     }
 
-    @GetMapping("/staffName")
-    public ResponseEntity<List<StaffDetail>> findStaffDetailByStaffName(@RequestParam String staffName){
-        List<StaffDetail> findStaffDetailByStaffName = staffDetailService.findByStaffName(staffName);
+    @GetMapping("/staff_name")
+    public ResponseEntity<List<StaffDetail>> findStaffDetailByStaffName(@RequestParam String staff_name){
+        List<StaffDetail> findStaffDetailByStaffName = staffDetailService.findByStaffName(staff_name);
         return ResponseObjectFactory.toResult(findStaffDetailByStaffName, HttpStatus.OK);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StaffDetail> updateStaffDetail(@RequestParam String staffId,@RequestParam String staffFirstName,@RequestParam String staffLastName,@RequestParam String address,@RequestParam String phone,@RequestParam String avatar,@RequestParam Timestamp update_at,@RequestParam int id){
-        staffDetailService.updateStaffDetail(staffId,staffFirstName,staffLastName,address,phone,avatar,update_at,id);
+    public ResponseEntity<StaffDetail> updateStaffDetail(@RequestParam String staff_id,@RequestParam String staff_first_name,@RequestParam String staff_last_name,@RequestParam String address,@RequestParam String phone,@RequestParam String avatar,@RequestParam Timestamp update_at,@RequestParam int id){
+        staffDetailService.updateStaffDetail(staff_id,staff_first_name,staff_last_name,address,phone,avatar,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 

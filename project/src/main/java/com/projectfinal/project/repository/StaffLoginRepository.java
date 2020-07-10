@@ -20,12 +20,12 @@ public interface StaffLoginRepository extends JpaRepository<StaffLogin,Integer> 
     StaffLogin findById(String id);
 
     @Query(value = "SELECT * FROM staff_login WHERE role_id = ?1",nativeQuery = true)
-    List<StaffLogin> findByRoleId(int roleId);
+    List<StaffLogin> findByRoleId(int role_id);
 
     @Query(value = "SELECT * FROM staff_login WHERE status = ?1", nativeQuery = true)
     List<StaffLogin> findByStatus(int status);
 
-    @Query(value = "INSERT INTO staff_login (email,password,role_id,company_id,status,create_at,update_at) values = ?1, ?2, ?3, ?4, ?5, ?6, ?7", nativeQuery = true)
+    @Query(value = "INSERT INTO staff_login (id, email,password,role_id,company_id,status,create_at,update_at) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)", nativeQuery = true)
     StaffLogin insertStaffLogin(StaffLogin staffLogin);
 
     @Query(value = "UPDATE staff_login SET email = ?1, password = ?2, role_id = ?3, company_id = ?4, status = ?5, update_at = ?6 WHERE id = ?7", nativeQuery = true)

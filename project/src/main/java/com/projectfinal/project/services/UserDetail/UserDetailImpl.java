@@ -28,14 +28,14 @@ public class UserDetailImpl implements  IUserDetail{
     }
 
     @Override
-    public UserDetail findByUserId(String userId) {
-        UserDetail findByUserId = userDetailRepository.findByUserId(userId);
+    public UserDetail findByUserId(String user_id) {
+        UserDetail findByUserId = userDetailRepository.findByUserId(user_id);
         return findByUserId;
     }
 
     @Override
-    public List<UserDetail> findByUsername(String userName) {
-        List<UserDetail> findByUsername = userDetailRepository.findByUsername(userName);
+    public List<UserDetail> findByUsername(String user_name) {
+        List<UserDetail> findByUsername = userDetailRepository.findByUsername(user_name);
         return findByUsername;
     }
 
@@ -45,7 +45,7 @@ public class UserDetailImpl implements  IUserDetail{
     }
 
     @Override
-    public UserDetail updateUserDetail(String memberId, String firstName, String lastName, Date dob, String address, String phone, String avatar, Timestamp update_at, int id) {
-        return userDetailRepository.updateUserDetail(memberId,firstName,lastName,dob,address,phone,avatar,update_at,id);
+    public UserDetail updateUserDetail(String member_id, String first_name, String last_name, Date dob, String address, String phone, String avatar, Timestamp update_at, int id) {
+        return userDetailRepository.updateUserDetail(member_id,first_name,last_name,dob,address,phone,avatar,update_at,id);
     }
 }

@@ -25,8 +25,8 @@ public class StaffLoginImpl implements IStaffLogin {
     }
 
     @Override
-    public List<StaffLogin> findByRoleId(int roleId) {
-        List<StaffLogin> findByRoleId = staffLoginRepository.findByRoleId(roleId);
+    public List<StaffLogin> findByRoleId(int role_id) {
+        List<StaffLogin> findByRoleId = staffLoginRepository.findByRoleId(role_id);
         return findByRoleId;
     }
 
@@ -36,10 +36,6 @@ public class StaffLoginImpl implements IStaffLogin {
         return findByStatus;
     }
 
-    @Override
-    public StaffLogin insertStaffLogin(StaffLogin staffLogin) {
-        return staffLoginRepository.insertStaffLogin(staffLogin);
-    }
 
     @Override
     public StaffLogin updateStaffLogin(String email, String password, int role_id, int company_id, int status, Timestamp update_at, int id) {

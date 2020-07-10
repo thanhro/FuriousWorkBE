@@ -11,11 +11,9 @@ public interface IUserLogin {
 
     UserLogin findById(String id);
 
-    List<UserLogin> findByRoleId(int roleId);
+    List<UserLogin> findByRoleId(int role_id);
 
     List<UserLogin> findByStatus(int status);
-
-    UserLogin insertUserLogin(UserLogin userLogin);
 
     UserLogin updateUserLogin(String email, String password, int role_id, int status, Timestamp update_at, int id);
 }

@@ -3,7 +3,7 @@ package com.projectfinal.project.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name = "StaffDetail")
+@Entity(name = "staff_detail")
 public class StaffDetail {
 
     @Id
