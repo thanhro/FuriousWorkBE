@@ -2,6 +2,7 @@ package com.projectfinal.project.resources;
 
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
 import com.projectfinal.project.model.UserDetail;
+import com.projectfinal.project.repository.UserDetailRepository;
 import com.projectfinal.project.services.UserDetail.IUserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class UserDetailResources {
 
     @Autowired
     private IUserDetail userDetailService;
+
+    @Autowired
+    private UserDetailRepository userDetailRepository;
 
     @GetMapping()
     public ResponseEntity<List<UserDetail>> listAllUserDetail(){
@@ -46,14 +50,20 @@ public class UserDetailResources {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDetail> updateUserDetail(@RequestParam String user_id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam Date dob,@RequestParam String address, @RequestParam String phone, @RequestParam String avatar, @RequestParam Timestamp update_at, @RequestParam int id){
+    public ResponseEntity<UserDetail> updateUserDetail(@RequestParam String user_id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam Date dob,@RequestParam String address, @RequestParam String phone, @RequestParam String avatar, @RequestParam int id){
+        Date date = new Date();
+        Timestamp update_at = new Timestamp(date.getTime());
         userDetailService.updateUserDetail(user_id,first_name,last_name,dob,address,phone,avatar,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDetail> insertUserDetail(@RequestBody UserDetail userDetail){
-        userDetailService.insertUserDetail(userDetail);
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());
+        userDetail.setCreate_at(ts);
+        userDetail.setUpdate_at(ts);
+        userDetailRepository.save(userDetail);
         return ResponseObjectFactory.toResult("Insert Successfully", HttpStatus.OK);
     }
 }

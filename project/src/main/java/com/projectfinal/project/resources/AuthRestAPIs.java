@@ -35,7 +35,7 @@ public class AuthRestAPIs {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserLoginRepository userLoginRepository;
+    private UserLoginRepository userLoginRepository;
 
     @Autowired
     private UserDetailRepository userDetailRepository;
@@ -47,12 +47,12 @@ public class AuthRestAPIs {
     private StaffDetailRepository staffDetailRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     JwtProvider jwtProvider;
 
-    @PostMapping("/userLogin")
+    @GetMapping("/userLogin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserLoginForm userLoginForm){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -67,7 +67,7 @@ public class AuthRestAPIs {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @PostMapping("/staffLogin")
+    @GetMapping("/staffLogin")
     public ResponseEntity<?> authenticateStaff (@Valid @RequestBody StaffLoginForm staffLoginForm){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -115,8 +115,8 @@ public class AuthRestAPIs {
         userDetail.setCreate_at(ts);
         userDetail.setUpdate_at(ts);
 
-        userLoginRepository.insertUserLogin(userLogin);
-        userDetailRepository.insertUserDetail(userDetail);
+        userLoginRepository.save(userLogin);
+        userDetailRepository.save(userDetail);
 
         List response = new ArrayList();
         response.add("Sign up successfully");
@@ -142,7 +142,7 @@ public class AuthRestAPIs {
         staffLogin.setPassword(passwordEncoder.encode(signUpStaffRequest.getPassword()));
         staffLogin.setRole_id(2);
         staffLogin.setCompany_id(signUpStaffRequest.getCompany_id());
-        staffLogin.setStatus(2);
+        staffLogin.setStatus(1);
         staffLogin.setCreate_at(ts);/*Set time create*/
         staffLogin.setUpdate_at(ts);/*First time create account update time = create time*/
 
@@ -156,8 +156,8 @@ public class AuthRestAPIs {
         staffDetail.setCreate_at(ts);
         staffDetail.setUpdate_at(ts);
 
-        staffLoginRepository.insertStaffLogin(staffLogin);
-        staffDetailRepository.insertStaffDetail(staffDetail);
+        staffLoginRepository.save(staffLogin);
+        staffDetailRepository.save(staffDetail);
 
         List response = new ArrayList();
         response.add("Sign up successfully");

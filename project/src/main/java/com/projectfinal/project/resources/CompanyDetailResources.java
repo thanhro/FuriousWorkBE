@@ -3,6 +3,7 @@ package com.projectfinal.project.resources;
 
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
 import com.projectfinal.project.model.CompanyDetail;
+import com.projectfinal.project.repository.CompanyDetailRepository;
 import com.projectfinal.project.services.CompanyDetail.ICompanyDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
@@ -20,6 +22,9 @@ public class CompanyDetailResources {
 
     @Autowired
     private ICompanyDetail companyDetailService;
+
+    @Autowired
+    private CompanyDetailRepository companyDetailRepository;
 
     @GetMapping()
     public ResponseEntity<List<CompanyDetail>> listAllCompanyDetail(){
@@ -40,14 +45,20 @@ public class CompanyDetailResources {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyDetail> updateCompanyDetail(@RequestParam String name_of_company,@RequestParam String web_of_company,@RequestParam String email_of_company,@RequestParam String phone_of_company,@RequestParam String address_of_company,@RequestParam String agency_address_company,@RequestParam String company_field,@RequestParam String description,@RequestParam int year_of_operation,@RequestParam Timestamp update_at,@RequestParam int id){
+    public ResponseEntity<CompanyDetail> updateCompanyDetail(@RequestParam String name_of_company,@RequestParam String web_of_company,@RequestParam String email_of_company,@RequestParam String phone_of_company,@RequestParam String address_of_company,@RequestParam String agency_address_company,@RequestParam String company_field,@RequestParam String description,@RequestParam int year_of_operation,@RequestParam int id){
+        Date date = new Date();
+        Timestamp update_at = new Timestamp(date.getTime());
         companyDetailService.updateCompanyDetail(name_of_company,web_of_company,email_of_company,phone_of_company,address_of_company,agency_address_company,company_field,description,year_of_operation,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyDetail> insertCompanyDetail(@RequestBody CompanyDetail companyDetail){
-        companyDetailService.insertCompanyDetail(companyDetail);
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());
+        companyDetail.setCreate_at(ts);
+        companyDetail.setUpdate_at(ts);
+        companyDetailRepository.save(companyDetail);
         return ResponseObjectFactory.toResult("Insert Successfully", HttpStatus.OK);
     }
 

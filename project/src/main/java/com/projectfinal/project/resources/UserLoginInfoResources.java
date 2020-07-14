@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
@@ -28,7 +29,7 @@ public class UserLoginInfoResources {
 
     @GetMapping("/id")
     public ResponseEntity<UserLogin> findUserLoginInfoById(@RequestParam String id){
-        UserLogin findUserLoginInfoById = userLoginService.findById(id);
+        UserLogin findUserLoginInfoById = userLoginService.findUserLoginInfoById(id);
         return ResponseObjectFactory.toResult(findUserLoginInfoById, HttpStatus.OK);
     }
 
@@ -45,7 +46,9 @@ public class UserLoginInfoResources {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserLogin> updateUserLoginInfo(@RequestParam String email, @RequestParam  String password, @RequestParam  int role_id, @RequestParam  int status, @RequestParam Timestamp update_at, @RequestParam  int id){
+    public ResponseEntity<UserLogin> updateUserLoginInfo(@RequestParam String email, @RequestParam  String password, @RequestParam  int role_id, @RequestParam  int status, @RequestParam  int id){
+        Date date = new Date();
+        Timestamp update_at = new Timestamp(date.getTime());
         userLoginService.updateUserLogin(email,password,role_id,status,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }

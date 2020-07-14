@@ -32,8 +32,8 @@ public class UserLogin {
 //    @NotNull
 //    @Enumerated(EnumType.STRING)
 //    private AuthProvider provider;
-
-    private String providerId;
+//
+//    private String providerId;
 
     public String getId() {
         return id;
@@ -98,12 +98,12 @@ public class UserLogin {
 //    public void setProvider(AuthProvider provider) {
 //        this.provider = provider;
 //    }
-
-    public String getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
-    }
+//
+//    public String getProviderId() {
+//        return providerId;
+//    }
+//
+//    public void setProviderId(String providerId) {
+//        this.providerId = providerId;
+//    }
 }

@@ -3,6 +3,7 @@ package com.projectfinal.project.resources;
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
 import com.projectfinal.project.config.security.payload.RoleUserInsertForm;
 import com.projectfinal.project.model.RoleUser;
+import com.projectfinal.project.repository.RoleUserRepository;
 import com.projectfinal.project.services.Role.IRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class RoleResources {
 
     @Autowired
     private IRole roleService;
+
+    @Autowired
+    private RoleUserRepository roleUserRepository;
 
     @GetMapping()
     public ResponseEntity<List<RoleUser>> listAllRole(){
@@ -41,7 +45,9 @@ public class RoleResources {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RoleUser> updateRole(@RequestParam String role_name, @RequestParam String description, @RequestParam Timestamp update_at, @RequestParam int id){
+    public ResponseEntity<RoleUser> updateRole(@RequestParam String role_name, @RequestParam String description, @RequestParam int id){
+        Date date = new Date();
+        Timestamp update_at = new Timestamp(date.getTime());
         roleService.updateRole(role_name,description,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
@@ -56,7 +62,7 @@ public class RoleResources {
         roleUser.setCreate_at(ts);
         roleUser.setUpdate_at(ts);
 
-        roleService.insertRole(roleUser);
+        roleUserRepository.save(roleUser);
 
         return ResponseObjectFactory.toResult("Insert Successfully", HttpStatus.OK);
     }

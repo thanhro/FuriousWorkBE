@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
@@ -28,7 +29,7 @@ public class StaffLoginInfoResources {
 
     @GetMapping("/id")
     public ResponseEntity<StaffLogin> findStaffLoginInfoById(@RequestParam String id){
-        StaffLogin findStaffLoginInfoById = staffLoginService.findById(id);
+        StaffLogin findStaffLoginInfoById = staffLoginService.findStaffLoginInfoById(id);
         return ResponseObjectFactory.toResult(findStaffLoginInfoById, HttpStatus.OK);
     }
 
@@ -45,7 +46,9 @@ public class StaffLoginInfoResources {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StaffLogin> updateStaffLoginInfo(@RequestParam String email,@RequestParam  String password,@RequestParam  int role_id,@RequestParam  int company_id,@RequestParam  int status,@RequestParam  Timestamp update_at,@RequestParam  int id){
+    public ResponseEntity<StaffLogin> updateStaffLoginInfo(@RequestParam String email,@RequestParam  String password,@RequestParam  int role_id,@RequestParam  int company_id,@RequestParam  int status,@RequestParam  int id){
+        Date date = new Date();
+        Timestamp update_at = new Timestamp(date.getTime());
         staffLoginService.updateStaffLogin(email,password,role_id,company_id,status,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }

@@ -9,7 +9,7 @@ public interface IStaffLogin {
 
     List<StaffLogin> findAllStaffLoginInfo();
 
-    StaffLogin findById(String id);
+    StaffLogin findStaffLoginInfoById(String id);
 
     List<StaffLogin> findByRoleId(int role_id);
 

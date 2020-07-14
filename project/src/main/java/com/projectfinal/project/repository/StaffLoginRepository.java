@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-public interface StaffLoginRepository extends JpaRepository<StaffLogin,Integer> {
+public interface StaffLoginRepository extends JpaRepository<StaffLogin,String> {
     Optional<StaffLogin> findByEmail(String email);
 
     Boolean existsByEmail(String email);
@@ -17,7 +17,7 @@ public interface StaffLoginRepository extends JpaRepository<StaffLogin,Integer> 
     Boolean existsIdByRandom(String id);
 
     @Query(value = "SELECT * FROM staff_login WHERE id = ?1", nativeQuery = true)
-    StaffLogin findById(String id);
+    StaffLogin findStaffLoginInfoById(String id);
 
     @Query(value = "SELECT * FROM staff_login WHERE role_id = ?1",nativeQuery = true)
     List<StaffLogin> findByRoleId(int role_id);
