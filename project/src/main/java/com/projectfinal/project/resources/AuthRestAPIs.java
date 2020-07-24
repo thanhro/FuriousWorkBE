@@ -52,7 +52,7 @@ public class AuthRestAPIs {
     @Autowired
     JwtProvider jwtProvider;
 
-    @GetMapping("/userLogin")
+    @GetMapping("/user_sign_in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserLoginForm userLoginForm){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -67,7 +67,7 @@ public class AuthRestAPIs {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @GetMapping("/staffLogin")
+    @GetMapping("/staff_sign_in")
     public ResponseEntity<?> authenticateStaff (@Valid @RequestBody StaffLoginForm staffLoginForm){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -82,7 +82,7 @@ public class AuthRestAPIs {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @PostMapping("/userSignup")
+    @PostMapping("/user_sign_up")
     public ResponseEntity<?> registerUser (@Valid @RequestBody SignUpUserRequest signUpUserRequest){
         if(userLoginRepository.existsByEmail(signUpUserRequest.getEmail())){
             throw new BadRequestException("Username already in use !");
@@ -123,7 +123,7 @@ public class AuthRestAPIs {
         return ResponseObjectFactory.toResult(response, HttpStatus.OK);
     }
 
-    @PostMapping("/staffSignup")
+    @PostMapping("/staff_sign_up")
     public ResponseEntity<?> registerStaff (@Valid @RequestBody SignUpStaffRequest signUpStaffRequest){
         if(staffLoginRepository.existsByEmail(signUpStaffRequest.getEmail())){
             throw new BadRequestException("Staff account already in use !");

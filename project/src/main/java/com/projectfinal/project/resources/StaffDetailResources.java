@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/staffDetail")
+@RequestMapping("/staff_detail")
 public class StaffDetailResources {
 
     @Autowired
@@ -26,30 +27,36 @@ public class StaffDetailResources {
     @Autowired
     private StaffDetailRepository staffDetailRepository;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<List<StaffDetail>> listAllStaffDetail(){
         List<StaffDetail> listAllStaffDetail = staffDetailService.findAllStaffDetail();
         return ResponseObjectFactory.toResult(listAllStaffDetail, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/id")
     public ResponseEntity<StaffDetail> findStaffDetailById(@RequestParam int id){
         StaffDetail findStaffDetailById = staffDetailService.findById(id);
         return ResponseObjectFactory.toResult(findStaffDetailById, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STAFF')")
     @GetMapping("/staff_id")
     public ResponseEntity<StaffDetail> findStaffDetailByStaffId(@RequestParam String staff_id){
         StaffDetail findStaffDetailByStaffId = staffDetailService.findByStaffId(staff_id);
         return ResponseObjectFactory.toResult(findStaffDetailByStaffId, HttpStatus.OK);
-    }
+    } // if role staff call function, company id need to be checked. Fix need
 
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STAFF')")
     @GetMapping("/staff_name")
     public ResponseEntity<List<StaffDetail>> findStaffDetailByStaffName(@RequestParam String staff_name){
         List<StaffDetail> findStaffDetailByStaffName = staffDetailService.findByStaffName(staff_name);
         return ResponseObjectFactory.toResult(findStaffDetailByStaffName, HttpStatus.OK);
-    }
+    } // if role staff call function, company id need to be checked. Fix need
 
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaffDetail> updateStaffDetail(@RequestParam String staff_id,@RequestParam String staff_first_name,@RequestParam String staff_last_name,@RequestParam String address,@RequestParam String phone,@RequestParam String avatar,@RequestParam int id){
         Date date = new Date();
@@ -58,6 +65,7 @@ public class StaffDetailResources {
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_STAFF')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaffDetail> insertStaffDetail(@RequestBody StaffDetail staffDetail){
         Date date = new Date();

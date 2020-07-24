@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/companyDetail")
+@RequestMapping("/company_detail")
 public class CompanyDetailResources {
 
     @Autowired
@@ -26,24 +27,28 @@ public class CompanyDetailResources {
     @Autowired
     private CompanyDetailRepository companyDetailRepository;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<List<CompanyDetail>> listAllCompanyDetail(){
         List<CompanyDetail> listAllCompanyDetail = companyDetailService.findAllCompanyDetail();
         return ResponseObjectFactory.toResult(listAllCompanyDetail, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/id")
     public ResponseEntity<CompanyDetail> findCompanyDetailById(@RequestParam int id){
         CompanyDetail findCompanyDetailById = companyDetailService.findById(id);
         return ResponseObjectFactory.toResult(findCompanyDetailById, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/name_of_company")
     public ResponseEntity<List<CompanyDetail>> findCompanyDetailByNameOfCompany(@RequestParam String name_of_company){
         List<CompanyDetail> findCompanyDetailByNameOfCompany = companyDetailService.findByCompanyName(name_of_company);
         return ResponseObjectFactory.toResult(findCompanyDetailByNameOfCompany, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_STAFF') OR hasRole('ROLE_ADMIN')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyDetail> updateCompanyDetail(@RequestParam String name_of_company,@RequestParam String web_of_company,@RequestParam String email_of_company,@RequestParam String phone_of_company,@RequestParam String address_of_company,@RequestParam String agency_address_company,@RequestParam String company_field,@RequestParam String description,@RequestParam int year_of_operation,@RequestParam int id){
         Date date = new Date();
@@ -52,6 +57,7 @@ public class CompanyDetailResources {
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STAFF')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyDetail> insertCompanyDetail(@RequestBody CompanyDetail companyDetail){
         Date date = new Date();

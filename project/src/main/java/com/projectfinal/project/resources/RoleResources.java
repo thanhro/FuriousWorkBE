@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -26,24 +27,28 @@ public class RoleResources {
     @Autowired
     private RoleUserRepository roleUserRepository;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<List<RoleUser>> listAllRole(){
         List<RoleUser> listAllRole = roleService.findAllRoleUser();
         return ResponseObjectFactory.toResult(listAllRole, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/id")
     public ResponseEntity<RoleUser> findRoleById(@RequestParam int id){
         RoleUser findRoleById = roleService.findById(id);
         return ResponseObjectFactory.toResult(findRoleById, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/role_name")
     public ResponseEntity<List<RoleUser>> findRoleByName(@RequestParam String role_name){
         List<RoleUser> findRoleByName = roleService.findByRoleName(role_name);
         return ResponseObjectFactory.toResult(findRoleByName, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleUser> updateRole(@RequestParam String role_name, @RequestParam String description, @RequestParam int id){
         Date date = new Date();
@@ -52,6 +57,7 @@ public class RoleResources {
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleUser> insertRole(@RequestBody RoleUserInsertForm roleUserInsertForm){
         Date date = new Date();

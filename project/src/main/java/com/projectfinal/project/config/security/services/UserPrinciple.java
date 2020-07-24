@@ -1,6 +1,7 @@
 package com.projectfinal.project.config.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projectfinal.project.model.Admin;
 import com.projectfinal.project.model.StaffLogin;
 import com.projectfinal.project.model.UserLogin;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,6 +40,11 @@ public class UserPrinciple implements UserDetails {
     public static StaffPrinciple buildStaff(StaffLogin staffLogin){
         List<GrantedAuthority> authorityList = Collections.singletonList(new SimpleGrantedAuthority("ROLE_STAFF"));
         return new StaffPrinciple (staffLogin.getId(),staffLogin.getEmail(),staffLogin.getPassword(),authorityList);
+    }
+
+    public static AdminPrinciple buildAdmin(Admin admin){
+        List<GrantedAuthority> authorityList = Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return new AdminPrinciple (admin.getId(),admin.getEmail(),admin.getPassword(),authorityList);
     }
 
     public String getId() {
