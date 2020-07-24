@@ -85,7 +85,7 @@ public class AuthRestAPIs {
     @PostMapping("/user_sign_up")
     public ResponseEntity<?> registerUser (@Valid @RequestBody SignUpUserRequest signUpUserRequest){
         if(userLoginRepository.existsByEmail(signUpUserRequest.getEmail())){
-            throw new BadRequestException("Username already in use !");
+            throw new BadRequestException("Email already in use !");
         }
 
         randomString random = new randomString();
@@ -126,7 +126,11 @@ public class AuthRestAPIs {
     @PostMapping("/staff_sign_up")
     public ResponseEntity<?> registerStaff (@Valid @RequestBody SignUpStaffRequest signUpStaffRequest){
         if(staffLoginRepository.existsByEmail(signUpStaffRequest.getEmail())){
-            throw new BadRequestException("Staff account already in use !");
+            throw new BadRequestException("Staff email already in use !");
+        }
+
+        if(staffLoginRepository.existsByCompanyIdAndStatus(signUpStaffRequest.getCompany_id())){
+            throw new BadRequestException(("This company already have staffs account. Please contact to those staff to create more staff account in this company"));
         }
 
         randomString random = new randomString();
@@ -142,7 +146,7 @@ public class AuthRestAPIs {
         staffLogin.setPassword(passwordEncoder.encode(signUpStaffRequest.getPassword()));
         staffLogin.setRole_id(2);
         staffLogin.setCompany_id(signUpStaffRequest.getCompany_id());
-        staffLogin.setStatus(1);
+        staffLogin.setStatus(0);
         staffLogin.setCreate_at(ts);/*Set time create*/
         staffLogin.setUpdate_at(ts);/*First time create account update time = create time*/
 

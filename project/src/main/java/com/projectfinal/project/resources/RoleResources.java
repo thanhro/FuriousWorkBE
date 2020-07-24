@@ -1,6 +1,7 @@
 package com.projectfinal.project.resources;
 
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
+import com.projectfinal.project.config.security.payload.RoleForm;
 import com.projectfinal.project.config.security.payload.RoleUserInsertForm;
 import com.projectfinal.project.model.RoleUser;
 import com.projectfinal.project.repository.RoleUserRepository;
@@ -50,9 +51,12 @@ public class RoleResources {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RoleUser> updateRole(@RequestParam String role_name, @RequestParam String description, @RequestParam int id){
+    public ResponseEntity<RoleUser> updateRole(@RequestBody RoleForm roleForm){
         Date date = new Date();
+        String role_name = roleForm.getRole_name();
+        String description = roleForm.getDescription();
         Timestamp update_at = new Timestamp(date.getTime());
+        int id = roleForm.getId();
         roleService.updateRole(role_name,description,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
     }

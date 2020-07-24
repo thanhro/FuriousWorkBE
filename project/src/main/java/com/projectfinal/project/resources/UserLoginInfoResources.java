@@ -57,6 +57,6 @@ public class UserLoginInfoResources {
         Timestamp update_at = new Timestamp(date.getTime());
         userLoginService.updateUserLogin(email,password,role_id,status,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
-    }
+    } //Fix this function to change password function.
 
 }

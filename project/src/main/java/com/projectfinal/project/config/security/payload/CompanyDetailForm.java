@@ -1,58 +1,42 @@
-package com.projectfinal.project.model;
+package com.projectfinal.project.config.security.payload;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
-@Entity(name = "company_detail")
-public class CompanyDetail {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(nullable = false)
+public class CompanyDetailForm {
+    @NotBlank
     private String name_of_company;
 
-    @Column(nullable = false)
+    @NotBlank
     private String web_of_company;
 
-    @Column(nullable = false)
+    @NotBlank
     private String email_of_company;
 
-    @Column(nullable = false)
+    @NotBlank
     private String phone_of_company;
 
-    @Column(nullable = false)
+    @NotBlank
     private String address_of_company;
 
-    @Column
+
     private String agency_address_company;
 
-    @Column(nullable = false)
+    @NotBlank
     private String company_field;
 
-    @Column
+
     private String description;
 
-    @Column
+    @NotBlank
     private int year_of_operation;
 
-    @Column(nullable = false)
-    private Timestamp create_at;
-
-    @Column(nullable = false)
-    private Timestamp update_at;
-
-    @Column(nullable = false)
+    @NotBlank
     private int status;
 
-    public int getId() {
-        return id;
-    }
+    private int id;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String staff_login_id;
 
     public String getName_of_company() {
         return name_of_company;
@@ -126,27 +110,27 @@ public class CompanyDetail {
         this.year_of_operation = year_of_operation;
     }
 
-    public Timestamp getCreate_at() {
-        return create_at;
-    }
-
-    public void setCreate_at(Timestamp create_at) {
-        this.create_at = create_at;
-    }
-
-    public Timestamp getUpdate_at() {
-        return update_at;
-    }
-
-    public void setUpdate_at(Timestamp update_at) {
-        this.update_at = update_at;
-    }
-
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getStaff_login_id() {
+        return staff_login_id;
+    }
+
+    public void setStaff_login_id(String staff_login_id) {
+        this.staff_login_id = staff_login_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

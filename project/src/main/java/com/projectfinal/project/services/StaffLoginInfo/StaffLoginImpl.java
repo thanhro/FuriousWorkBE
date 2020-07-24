@@ -41,4 +41,5 @@ public class StaffLoginImpl implements IStaffLogin {
     public StaffLogin updateStaffLogin(String email, String password, int role_id, int company_id, int status, Timestamp update_at, int id) {
         return staffLoginRepository.updateStaffLogin(email,password,role_id,company_id,status,update_at,id);
     }
+
 }

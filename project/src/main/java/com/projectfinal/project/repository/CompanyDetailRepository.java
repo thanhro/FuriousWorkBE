@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface CompanyDetailRepository extends JpaRepository<CompanyDetail,Integer> {
 
+    Boolean existsCompanyDetailByName_of_company(String name_of_company);
+
     @Query(value = "SELECT * FROM company_detail WHERE id = ?1", nativeQuery = true)
     CompanyDetail findById(int id);
 
@@ -20,4 +22,10 @@ public interface CompanyDetailRepository extends JpaRepository<CompanyDetail,Int
 
     @Query(value = "UPDATE company_detail SET name_of_company = ?1, web_of_company = ?2, email_of_company = ?3, phone_of_company = ?4, address_of_company = ?5, agency_address_company = ?6, company_field = ?7, description = ?8, year_of_operation = ?9, update_at = ?10 WHERE id = ?11", nativeQuery = true)
     CompanyDetail updateCompanyDetail(String name_of_company, String web_of_company, String email_of_company, String phone_of_company, String address_of_company, String agency_address_company, String company_field, String description, int year_of_operation, Timestamp update_at, int id);
+
+    @Query(value = "UPDATE company_detail SET status = ?1 WHERE id = ?2", nativeQuery = true)
+    CompanyDetail updateCompanyDetailByAdministrator (int status, int id);
+
+    @Query(value = "SELECT company_id FROM staff_login WHERE id = ?1", nativeQuery = true)
+    Integer getCompanyId (String id);
 }

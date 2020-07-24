@@ -2,6 +2,7 @@ package com.projectfinal.project.resources;
 
 
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
+import com.projectfinal.project.config.security.payload.StaffDetailForm;
 import com.projectfinal.project.model.StaffDetail;
 import com.projectfinal.project.repository.StaffDetailRepository;
 import com.projectfinal.project.services.StaffDetail.IStaffDetail;
@@ -34,12 +35,12 @@ public class StaffDetailResources {
         return ResponseObjectFactory.toResult(listAllStaffDetail, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STAFF')")
     @GetMapping("/id")
     public ResponseEntity<StaffDetail> findStaffDetailById(@RequestParam int id){
         StaffDetail findStaffDetailById = staffDetailService.findById(id);
         return ResponseObjectFactory.toResult(findStaffDetailById, HttpStatus.OK);
-    }
+    } // FE send that person id, staff can see their account detail by this function
 
     @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_STAFF')")
     @GetMapping("/staff_id")
@@ -58,8 +59,15 @@ public class StaffDetailResources {
 
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StaffDetail> updateStaffDetail(@RequestParam String staff_id,@RequestParam String staff_first_name,@RequestParam String staff_last_name,@RequestParam String address,@RequestParam String phone,@RequestParam String avatar,@RequestParam int id){
+    public ResponseEntity<StaffDetail> updateStaffDetail(@RequestBody StaffDetailForm staffDetailForm){
         Date date = new Date();
+        String staff_id = staffDetailForm.getStaff_id();
+        String staff_first_name = staffDetailForm.getStaff_first_name();
+        String staff_last_name = staffDetailForm.getStaff_last_name();
+        String address = staffDetailForm.getAddress();
+        String phone = staffDetailForm.getPhone();
+        String avatar = staffDetailForm.getAvatar();
+        int id = staffDetailForm.getId();
         Timestamp update_at = new Timestamp(date.getTime());
         staffDetailService.updateStaffDetail(staff_id,staff_first_name,staff_last_name,address,phone,avatar,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);

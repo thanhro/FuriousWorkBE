@@ -30,4 +30,7 @@ public interface StaffLoginRepository extends JpaRepository<StaffLogin,String> {
 
     @Query(value = "UPDATE staff_login SET email = ?1, password = ?2, role_id = ?3, company_id = ?4, status = ?5, update_at = ?6 WHERE id = ?7", nativeQuery = true)
     StaffLogin updateStaffLogin(String email, String password, int role_id, int company_id, int status, Timestamp update_at, int id);
+
+    @Query(value = "SELECT EXISTS( SELECT TRUE FROM staff_login WHERE company_id = ?1, status = 1)",nativeQuery = true)
+    Boolean existsByCompanyIdAndStatus(int company_id);
 }

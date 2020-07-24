@@ -1,6 +1,7 @@
 package com.projectfinal.project.resources;
 
 import com.projectfinal.project.config.responseOb.ResponseObjectFactory;
+import com.projectfinal.project.config.security.payload.UserDetailForm;
 import com.projectfinal.project.model.UserDetail;
 import com.projectfinal.project.repository.UserDetailRepository;
 import com.projectfinal.project.services.UserDetail.IUserDetail;
@@ -56,8 +57,16 @@ public class UserDetailResources {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDetail> updateUserDetail(@RequestParam String user_id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam Date dob,@RequestParam String address, @RequestParam String phone, @RequestParam String avatar, @RequestParam int id){
+    public ResponseEntity<UserDetail> updateUserDetail(@RequestBody UserDetailForm userDetailForm){
         Date date = new Date();
+        String user_id = userDetailForm.getUser_id();
+        String first_name = userDetailForm.getFirst_name();
+        String last_name = userDetailForm.getLast_name();
+        Date dob = userDetailForm.getDob();
+        String address = userDetailForm.getAddress();
+        String phone = userDetailForm.getPhone();
+        String avatar = userDetailForm.getAvatar();
+        int id = userDetailForm.getId();
         Timestamp update_at = new Timestamp(date.getTime());
         userDetailService.updateUserDetail(user_id,first_name,last_name,dob,address,phone,avatar,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);

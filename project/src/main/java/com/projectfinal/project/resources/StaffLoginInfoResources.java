@@ -57,6 +57,6 @@ public class StaffLoginInfoResources {
         Timestamp update_at = new Timestamp(date.getTime());
         staffLoginService.updateStaffLogin(email,password,role_id,company_id,status,update_at,id);
         return ResponseObjectFactory.toResult("Update Successfully", HttpStatus.OK);
-    } // check company id with role staff
+    } // check company id with role staff. Fix this function to change password function.
 
 }
